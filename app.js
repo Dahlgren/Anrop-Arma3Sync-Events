@@ -30,7 +30,7 @@ function createEvents(operations) {
 function writeEvents(events) {
   var java = [
     '-jar',
-    path.resolve('arma3sync.jar'),
+    path.resolve(__dirname, 'arma3sync.jar'),
   ];
 
   var args = [
