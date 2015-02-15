@@ -15,7 +15,7 @@ function createEvents(operations) {
     var addons = {};
 
     operation.pws.forEach(function (addon) {
-      addons[addon.name] = true;
+      addons[addon.name] = false;
     });
 
     return {
