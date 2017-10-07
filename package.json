@@ -4,7 +4,8 @@
   "description": "Populate Arma3Sync repository with events from website",
   "main": "events.js",
   "scripts": {
-    "lint": "standard --verbose"
+    "lint": "standard --verbose",
+    "start": "node events.js"
   },
   "repository": {
     "type": "git",
