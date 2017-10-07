@@ -10,7 +10,13 @@ function fetchOperations(cb) {
   });
 }
 
-function createEvents(operations) {
+function fetchTemplates(cb) {
+  request.get({url: "https://playwithsix.anrop.se/templates", json:true}, function (err, res) {
+    cb(err, res.body);
+  });
+}
+
+function createOperationEvents(operations) {
   return operations.map(function (operation) {
     var addons = {};
 
@@ -21,6 +27,23 @@ function createEvents(operations) {
     return {
       name: operation.title,
       description: operation.datetime,
+      addonNames: addons,
+      userconfigFolderNames: {},
+    }
+  })
+}
+
+function createTemplateEvents(templates) {
+  return templates.map(function (template) {
+    var addons = {};
+
+    template.mods.forEach(function (mod) {
+      addons[mod] = false;
+    });
+
+    return {
+      name: template.title,
+      description: '',
       addonNames: addons,
       userconfigFolderNames: {},
     }
@@ -69,6 +92,15 @@ fetchOperations(function (err, operations) {
   if (err) {
     console.log(err);
   } else {
-    writeEvents(createEvents(operations));
+    var operationEvents = createOperationEvents(operations);
+    fetchTemplates(function (err, templates) {
+      if (err) {
+        console.log(err);
+      } else {
+        var templateEvents = createTemplateEvents(templates);
+        var events = operationEvents.concat(templateEvents);
+        writeEvents(events);
+      };
+    });
   }
 });
