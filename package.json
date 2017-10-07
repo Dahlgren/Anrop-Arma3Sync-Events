@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Populate Arma3Sync repository with events from website",
   "main": "events.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "standard --verbose"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Anrop/Anrop-Arma3Sync-Events.git"
@@ -19,5 +21,8 @@
   "homepage": "https://github.com/Anrop/Anrop-Arma3Sync-Events#readme",
   "dependencies": {
     "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
   }
 }
