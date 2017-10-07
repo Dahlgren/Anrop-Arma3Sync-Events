@@ -1,0 +1,23 @@
+{
+  "name": "anrop-arma3sync-events",
+  "version": "1.0.0",
+  "description": "Populate Arma3Sync repository with events from website",
+  "main": "events.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anrop/Anrop-Arma3Sync-Events.git"
+  },
+  "keywords": [
+    "Arma"
+  ],
+  "author": "Björn Dahlgren",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Anrop/Anrop-Arma3Sync-Events/issues"
+  },
+  "homepage": "https://github.com/Anrop/Anrop-Arma3Sync-Events#readme",
+  "dependencies": {
+    "request": "^2.83.0"
+  }
+}
