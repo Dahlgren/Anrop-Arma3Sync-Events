@@ -25,7 +25,7 @@ function createOperationEvents (operations) {
     })
 
     return {
-      name: operation.title,
+      name: 'Operation - ' + operation.title,
       description: operation.datetime,
       addonNames: addons,
       userconfigFolderNames: {}
@@ -42,7 +42,7 @@ function createTemplateEvents (templates) {
     })
 
     return {
-      name: template.title,
+      name: 'Template - ' + template.title,
       description: '',
       addonNames: addons,
       userconfigFolderNames: {}
