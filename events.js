@@ -17,7 +17,9 @@ function fetchTemplates (cb) {
 }
 
 function createOperationEvents (operations) {
-  return operations.map(function (operation) {
+  return operations.filter(function (operation) {
+    return operation.pws && operation.pws.length > 0
+  }).map(function (operation) {
     var addons = {}
 
     operation.pws.forEach(function (addon) {
