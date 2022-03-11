@@ -1,18 +1,13 @@
 require('dotenv').config()
 
 const arma3syncLib = require('arma3sync-lib')
-const request = require('request')
+const axios = require('axios')
 
-function fetchOperations (cb) {
-  request.get({ url: 'http://anrop.se/api/operations', json: true }, function (err, res) {
-    cb(err, res.body)
-  })
-}
+const operationsUrl = 'http://anrop.se/api/operations'
+const templatesUrl = 'https://playwithsix.anrop.se/templates'
 
-function fetchTemplates (cb) {
-  request.get({ url: 'https://playwithsix.anrop.se/templates', json: true }, function (err, res) {
-    cb(err, res.body)
-  })
+function getJSON (url) {
+  return axios.get(url).then(res => res.data)
 }
 
 function createOperationEvents (operations) {
@@ -52,22 +47,18 @@ function createTemplateEvents (templates) {
 }
 
 function writeEvents (events) {
-  arma3syncLib.a3sDirectory.setEvents({ list: events })
+  return arma3syncLib.a3sDirectory.setEvents({ list: events })
 }
 
-fetchOperations(function (err, operations) {
-  if (err) {
-    console.log(err)
-  } else {
-    const operationEvents = createOperationEvents(operations)
-    fetchTemplates(function (err, templates) {
-      if (err) {
-        console.log(err)
-      } else {
-        const templateEvents = createTemplateEvents(templates)
-        const events = operationEvents.concat(templateEvents)
-        writeEvents(events)
-      };
-    })
-  }
+Promise.all([
+  getJSON(operationsUrl),
+  getJSON(templatesUrl)
+]).then(([operations, templates]) => {
+  const operationEvents = createOperationEvents(operations)
+  const templateEvents = createTemplateEvents(templates)
+  const events = operationEvents.concat(templateEvents)
+  return writeEvents(events)
+}).catch((err) => {
+  console.error(err)
+  process.exit(1)
 })
