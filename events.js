@@ -3,7 +3,7 @@ require('dotenv').config()
 const arma3syncLib = require('arma3sync-lib')
 const axios = require('axios')
 
-const operationsUrl = 'http://anrop.se/api/operations'
+const operationsUrl = 'https://www.anrop.se/api/operations'
 const templatesUrl = 'https://playwithsix.anrop.se/templates'
 
 function getJSON (url) {
