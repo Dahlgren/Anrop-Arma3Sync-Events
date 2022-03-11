@@ -1,16 +1,16 @@
 require('dotenv').config()
 
-var arma3syncLib = require('arma3sync-lib')
-var request = require('request')
+const arma3syncLib = require('arma3sync-lib')
+const request = require('request')
 
 function fetchOperations (cb) {
-  request.get({url: 'http://anrop.se/api/operations', json: true}, function (err, res) {
+  request.get({ url: 'http://anrop.se/api/operations', json: true }, function (err, res) {
     cb(err, res.body)
   })
 }
 
 function fetchTemplates (cb) {
-  request.get({url: 'https://playwithsix.anrop.se/templates', json: true}, function (err, res) {
+  request.get({ url: 'https://playwithsix.anrop.se/templates', json: true }, function (err, res) {
     cb(err, res.body)
   })
 }
@@ -19,7 +19,7 @@ function createOperationEvents (operations) {
   return operations.filter(function (operation) {
     return operation.pws && operation.pws.length > 0
   }).map(function (operation) {
-    var addons = {}
+    const addons = {}
 
     operation.pws.forEach(function (addon) {
       addons[addon.name] = false
@@ -36,7 +36,7 @@ function createOperationEvents (operations) {
 
 function createTemplateEvents (templates) {
   return templates.map(function (template) {
-    var addons = {}
+    const addons = {}
 
     template.mods.forEach(function (mod) {
       addons[mod] = false
@@ -59,13 +59,13 @@ fetchOperations(function (err, operations) {
   if (err) {
     console.log(err)
   } else {
-    var operationEvents = createOperationEvents(operations)
+    const operationEvents = createOperationEvents(operations)
     fetchTemplates(function (err, templates) {
       if (err) {
         console.log(err)
       } else {
-        var templateEvents = createTemplateEvents(templates)
-        var events = operationEvents.concat(templateEvents)
+        const templateEvents = createTemplateEvents(templates)
+        const events = operationEvents.concat(templateEvents)
         writeEvents(events)
       };
     })
