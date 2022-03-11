@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/Anrop/Anrop-Arma3Sync-Events#readme",
   "dependencies": {
+    "arma3sync-lib": "^1.0.0",
+    "dotenv": "^16.0.0",
     "request": "^2.83.0"
   },
   "devDependencies": {
