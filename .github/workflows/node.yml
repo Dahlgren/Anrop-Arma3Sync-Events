@@ -42,4 +42,5 @@ jobs:
       - name: Run
         run: npm start
         env:
+          ARMA3SYNC_REPO_NAME: Anrop
           ARMA3SYNC_REPO_PATH: .
